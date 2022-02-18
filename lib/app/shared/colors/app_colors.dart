@@ -8,9 +8,10 @@ class AppColors {
   static const Color ifDarkGrenn = Color(0xFF006534);
   static const Color ifGrenn = Color(_ifGrennPrimaryValue);
   static const Color ifRed = Color(0xFFEB5757);
-  static const Color ifGray = Color(0xFF828282);
   static const Color ifWhite = Color(0xFFFFFFFF);
   static const Color ifWhiteSubtitle = Color(0xFFF2F2F2);
+  static const Color ifGray = Color(0xFF828282);
+  static const Color ifGrayBackground = Color(0xFFEFEFEF);
 
   static const MaterialColor ifMaterialGreenColor = MaterialColor(
     _ifGrennPrimaryValue,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ifchat/app/modules/home/components/daily_limit_likes_widget.dart';
+import 'package:ifchat/app/modules/home/components/loading_widget.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/if.dart';
 import 'package:ifchat/app/shared/models/user_model.dart';
@@ -20,13 +21,11 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  // int _stackIndex = 1;
-
   @override
   void initState() {
     super.initState();
 
-    widget.controller.init();
+    if (!widget.controller.isInit) widget.controller.init();
   }
 
   @override
@@ -38,7 +37,10 @@ class _FeedPageState extends State<FeedPage> {
         child: Observer(builder: (_) {
           return Stack(
             children: [
-              const DailyLimitLikesWidget(),
+              if (!widget.controller.isInit)
+                const LoadingWidget()
+              else
+                const DailyLimitLikesWidget(),
               ...List.generate(
                 widget.controller.users.length,
                 (index) => UserCardWidget(

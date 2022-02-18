@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/icons/app_icons.dart';
 
-import 'pages/chat/chat_page.dart';
+import 'pages/chat/chats_page.dart';
 import 'pages/feed/feed_page.dart';
 import 'pages/profile/profile_page.dart';
 

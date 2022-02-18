@@ -9,9 +9,7 @@ class FeedController = _FeedControllerBase with _$FeedController;
 abstract class _FeedControllerBase with Store {
   ObservableList<UserModel> users = <UserModel>[].asObservable();
 
-  int currentCardIndex = 0;
-
-  int nextCardIndex = 1;
+  bool isInit = false;
 
   @computed
   dynamic get next => users.isNotEmpty ? _next : null;
@@ -21,6 +19,7 @@ abstract class _FeedControllerBase with Store {
 
   @action
   Future<void> init() async {
+    await Future.delayed(const Duration(seconds: 3));
     users.addAll([
       UserModel(
         course: 'Computação',
@@ -41,7 +40,7 @@ abstract class _FeedControllerBase with Store {
         ifce: If.fortaleza,
       ),
     ]);
-    await Future.delayed(const Duration(seconds: 1));
+    isInit = true;
   }
 
   bool inFocus(int index) => (users.length - 1) == index;
