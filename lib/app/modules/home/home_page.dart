@@ -14,18 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final pages = <Widget>[
+    FeedPage(),
+    const ChatsPage(),
+    const ProfilePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: const TabBarView(
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            FeedPage(),
-            ChatsPage(),
-            ProfilePage(),
-          ],
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: pages,
         ),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ifchat/app/modules/home/components/physics_card_drag_widget.dart';
 
 import '../../components/appbar_widget.dart';
 
@@ -14,6 +15,7 @@ class _ChatsPageState extends State<ChatsPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: AppBarWidget(title: 'Chats'),
+      body: PhysicsCardDragDemo(),
     );
   }
 }

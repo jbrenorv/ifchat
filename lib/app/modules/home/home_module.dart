@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/modules/home/pages/feed/feed_controller.dart';
 import '../home/home_store.dart';
 
 import 'home_page.dart';
