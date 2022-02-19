@@ -30,7 +30,7 @@ class _ChatsPageState extends State<ChatsPage> {
         ifce: If.fortaleza,
       ),
       lastMessage: MessageModel(
-        content: 'content',
+        content: 'Flying to Italy on 24th of this month.',
         visualized: false,
       ),
     ),
@@ -45,230 +45,59 @@ class _ChatsPageState extends State<ChatsPage> {
         ifce: If.fortaleza,
       ),
       lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: true,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Computação',
-        name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 21,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
-        visualized: false,
-      ),
-    ),
-    ChatModel(
-      user: UserModel(
-        course: 'Matemática',
-        name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
-        id: 'fg5g44g65dg4b4',
-        age: 17,
-        degree: Degree.sup,
-        ifce: If.fortaleza,
-      ),
-      lastMessage: MessageModel(
-        content: 'content',
+        content: 'Sure thing!',
         visualized: true,
       ),
     ),
   ];
+
+  final _itemChatHeight = 100.0;
+
+  double get _listViewHeight => _itemChatHeight * chats.length;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.ifWhite,
       appBar: const AppBarWidget(title: 'Chats'),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 20,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 20,
+              ),
+              child: SearchInputWidget(),
             ),
-            child: SearchInputWidget(),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 10,
-            ),
-            child: Text(
-              'Mensagens (3)',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
-                color: AppColors.ifDarkGrenn,
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
+              child: Text(
+                'Mensagens (3)',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.ifDarkGrenn,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: chats.length,
-              itemBuilder: (_, index) {
-                return ItemChatWidget(chat: chats[index]);
-              },
+            ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: _listViewHeight),
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemExtent: _itemChatHeight,
+                itemCount: chats.length,
+                itemBuilder: (_, index) {
+                  return ItemChatWidget(chat: chats[index]);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

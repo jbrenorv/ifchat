@@ -12,6 +12,7 @@ class AppColors {
   static const Color ifWhiteSubtitle = Color(0xFFF2F2F2);
   static const Color ifGray = Color(0xFF828282);
   static const Color ifGrayBackground = Color(0xFFEFEFEF);
+  static const Color ifGraySubtitle = Color(0xFF828282);
 
   static const MaterialColor ifMaterialGreenColor = MaterialColor(
     _ifGrennPrimaryValue,
