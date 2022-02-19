@@ -50,7 +50,11 @@ class _UserCardWidgetState extends State<UserCardWidget>
       vsync: this,
       duration: const Duration(seconds: 1),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInBack);
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInBack,
+    );
 
     SchedulerBinding.instance!.addPostFrameCallback((_) {
       final deviceWidth = MediaQuery.of(context).size.width;
@@ -71,6 +75,12 @@ class _UserCardWidgetState extends State<UserCardWidget>
     _controller.forward().then((_) {
       if (widget.onLeave != null) widget.onLeave!();
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
