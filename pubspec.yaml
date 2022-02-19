@@ -139,5 +139,5 @@ vars:
   appname: iFChat
 
 scripts:
-  watch: flutter pub run build_runner watch --delete-conflicting-outputs
+  mobx_watch: flutter pub run build_runner watch --delete-conflicting-outputs
   print: echo $appname
