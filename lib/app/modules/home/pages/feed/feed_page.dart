@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ifchat/app/modules/home/components/daily_limit_likes_widget.dart';
 import 'package:ifchat/app/modules/home/components/loading_widget.dart';
-import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
-import 'package:ifchat/app/shared/models/user_model.dart';
 
 import '../../components/appbar_widget.dart';
 import '../../components/user_card_widget.dart';

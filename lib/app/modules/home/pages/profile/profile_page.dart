@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:ifchat/app/modules/home/components/appbar_widget.dart';
