@@ -8,7 +8,7 @@ import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/if.dart';
 import 'package:ifchat/app/shared/models/user_model.dart';
 
-import '../../components/appbar_widget.dart';
+import '../../../../shared/components/appbar_widget.dart';
 
 class ChatsPage extends StatefulWidget {
   const ChatsPage({Key? key}) : super(key: key);
@@ -59,7 +59,16 @@ class _ChatsPageState extends State<ChatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.ifWhite,
-      appBar: const AppBarWidget(title: 'Chats'),
+      appBar: const AppBarWidget(
+        title: Text(
+          'Chats',
+          style: TextStyle(
+            color: AppColors.ifWhite,
+            fontWeight: FontWeight.bold,
+            fontSize: 28,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

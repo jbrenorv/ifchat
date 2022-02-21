@@ -5,6 +5,7 @@ import 'package:ifchat/app/shared/services/auth_service.dart';
 
 import 'modules/auth/auth_module.dart';
 import 'modules/home/home_module.dart';
+import 'app_routes.dart';
 
 class AppModule extends Module {
   @override
@@ -15,11 +16,7 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ModuleRoute(
-      Modular.initialRoute,
-      module: HomeModule(),
-      guards: [HomeGuard()],
-    ),
-    ModuleRoute('/auth/', module: AuthModule())
+    ModuleRoute(AppRoutes.home, module: HomeModule(), guards: [HomeGuard()]),
+    ModuleRoute(AppRoutes.signin, module: AuthModule())
   ];
 }
