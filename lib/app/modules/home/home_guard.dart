@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:ifchat/app/shared/routes/app_routes.dart';
+import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/shared/services/auth_service.dart';
 
 class HomeGuard extends RouteGuard {

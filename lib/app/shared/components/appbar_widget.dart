@@ -7,7 +7,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   final preferredSize = const Size.fromHeight(110);
 
-  final String title;
+  final Widget title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           bottomRight: Radius.circular(8),
         ),
       ),
-      child: Text(
-        title,
-        style: const TextStyle(
-          color: AppColors.ifWhite,
-          fontWeight: FontWeight.bold,
-          fontSize: 28,
-        ),
-      ),
+      child: title,
     );
   }
 }

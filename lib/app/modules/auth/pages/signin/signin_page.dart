@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/text_input_widget.dart';
 import 'package:ifchat/app/shared/images/app_images.dart';
@@ -96,14 +98,16 @@ class _SiginPageState extends State<SiginPage> {
                             child: const Text('Esqueci minha senha'),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () => Modular.to.pushNamed(
+                              AppRoutes.signup,
+                            ),
                             style: TextButton.styleFrom(
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8.0,
                               ),
                             ),
-                            child: const Text('Cadastrar-me'),
+                            child: const Text('Cadastrar-se'),
                           ),
                         ],
                       ),
