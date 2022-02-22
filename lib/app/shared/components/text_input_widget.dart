@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ifchat/app/shared/colors/app_colors.dart';
+
+import 'rounded_gray_container_widget.dart';
 
 class TextInputWidget extends StatelessWidget {
   const TextInputWidget({
@@ -8,23 +9,22 @@ class TextInputWidget extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.obscureText = false,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   final Icon? prefixIcon;
   final String? hintText;
   final bool obscureText;
   final TextEditingController controller;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.ifGrayBackground,
-        borderRadius: BorderRadius.circular(8),
-      ),
+    return RoundedGrayContainerWidget(
       child: TextField(
         controller: controller,
         obscureText: obscureText,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,

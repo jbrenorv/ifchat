@@ -8,7 +8,7 @@ class UserModel {
   final String name;
   final String photoUrl;
   final String id;
-  final int age;
+  final DateTime birth;
   final Degree degree;
   final If ifce;
 
@@ -17,7 +17,7 @@ class UserModel {
     required this.name,
     required this.photoUrl,
     required this.id,
-    required this.age,
+    required this.birth,
     required this.degree,
     required this.ifce,
   });
@@ -27,7 +27,7 @@ class UserModel {
     String? name,
     String? photoUrl,
     String? id,
-    int? age,
+    DateTime? birth,
     Degree? degree,
     If? ifce,
   }) {
@@ -36,7 +36,7 @@ class UserModel {
       name: name ?? this.name,
       photoUrl: photoUrl ?? this.photoUrl,
       id: id ?? this.id,
-      age: age ?? this.age,
+      birth: birth ?? this.birth,
       degree: degree ?? this.degree,
       ifce: ifce ?? this.ifce,
     );
@@ -48,7 +48,7 @@ class UserModel {
       'name': name,
       'photoUrl': photoUrl,
       'id': id,
-      'age': age,
+      'birth': birth.millisecondsSinceEpoch,
       'degree': Degree.values.indexOf(degree),
       'ifce': If.values.indexOf(ifce),
     };
@@ -60,7 +60,7 @@ class UserModel {
       name: map['name'] ?? '',
       photoUrl: map['photoUrl'] ?? '',
       id: map['id'] ?? '',
-      age: map['age']?.toInt() ?? 0,
+      birth: DateTime.fromMillisecondsSinceEpoch(map['birth']),
       degree: Degree.values[map['degree']],
       ifce: If.values[map['ifce']],
     );
@@ -73,7 +73,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(course: $course, name: $name, photoUrl: $photoUrl, id: $id, age: $age, degree: $degree, ifce: $ifce)';
+    return 'UserModel(course: $course, name: $name, photoUrl: $photoUrl, id: $id, birth: $birth, degree: $degree, ifce: $ifce)';
   }
 
   @override
@@ -85,7 +85,7 @@ class UserModel {
         other.name == name &&
         other.photoUrl == photoUrl &&
         other.id == id &&
-        other.age == age &&
+        other.birth == birth &&
         other.degree == degree &&
         other.ifce == ifce;
   }
@@ -96,8 +96,10 @@ class UserModel {
         name.hashCode ^
         photoUrl.hashCode ^
         id.hashCode ^
-        age.hashCode ^
+        birth.hashCode ^
         degree.hashCode ^
         ifce.hashCode;
   }
+
+  int get age => birth.difference(DateTime.now()).inDays ~/ 365;
 }
