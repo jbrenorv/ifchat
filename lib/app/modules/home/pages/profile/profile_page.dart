@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
     name: 'Breno',
     photoUrl: 'https://picsum.photos/id/1005/300/400',
     id: 'fg5g44g65dg4b4',
-    age: 21,
+    birth: DateTime(2000),
     degree: Degree.sup,
     ifce: If.fortaleza,
   );

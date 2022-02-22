@@ -1,3 +1,5 @@
+import 'package:ifchat/app/shared/enums/degree.dart';
+
 enum If {
   acarau,
   aracati,
@@ -73,6 +75,64 @@ extension ToString on If {
         return 'Ubajara';
       case If.umirim:
         return 'Umirim';
+    }
+  }
+
+  Map<Degree, List<String>> get courses {
+    switch (this) {
+      case If.fortaleza:
+        return {
+          Degree.sup: [
+            // tecnologos
+            'Estradas',
+            'Gestão Ambiental',
+            'Gestão Desportiva e de Lazer',
+            'Hotelaria',
+            'Mecatrônica Industrial',
+            'Processos Químicos',
+            'Saneamento Ambiental',
+            'Telemática',
+
+            // licenciatura
+            'Artes Visuais',
+            'Física',
+            'Matemática',
+            'Teatro',
+
+            // bacharelados
+            'Engenharia Civil',
+            'Engenharia da Computação',
+            'Engenharia de Mecatrônica',
+            'Engenharia de Telecomunicações',
+            'Turismo',
+          ],
+          Degree.int: [
+            // integrado
+            'Edificações',
+            'Eletrotécnica',
+            'Informática',
+            'Mecânica',
+            'Química',
+            'Telecomunicações',
+          ],
+          Degree.sub: [
+            // subsequente
+            'Edificações',
+            'Eletrotécnica',
+            'Guia de Turismo',
+            'Instrumento Musical',
+            'Manutenção Automotiva',
+            'Mecânica Industrial',
+            'Segurança do Trabalho',
+          ],
+        };
+
+      default:
+        return {
+          Degree.sup: [],
+          Degree.int: [],
+          Degree.sub: [],
+        };
     }
   }
 }

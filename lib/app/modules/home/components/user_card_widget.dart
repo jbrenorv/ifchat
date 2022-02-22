@@ -131,7 +131,7 @@ class _UserCardWidgetState extends State<UserCardWidget>
                           ),
                         ),
                         Text(
-                          '${widget.user.course}, ${widget.user.degree.name}'
+                          '${widget.user.course}, ${widget.user.degree.sigla}'
                           ' • ${widget.user.ifce.name}',
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
