@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/modules/auth/pages/signup/signup_controller.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/appbar_widget.dart';
@@ -68,7 +69,7 @@ class _SigupPageState extends State<SigupPage> {
                     onTap: () async {
                       final birth = await showDatePicker(
                         context: context,
-                        // 18 anos ;})atras
+                        // 18 anos atras
                         initialDate:
                             DateTime.now().subtract(const Duration(days: 6570)),
                         // 30 anos atras
@@ -208,7 +209,15 @@ class _SigupPageState extends State<SigupPage> {
           Icons.arrow_forward_rounded,
           color: AppColors.ifWhite,
         ),
-        onPressed: () {},
+        onPressed: () {
+          final result = controller.validate();
+          if (result != null) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(result)));
+          } else {
+            Modular.to.pushNamed(AppRoutes.signupRegisterPhotos);
+          }
+        },
       ),
     );
   }

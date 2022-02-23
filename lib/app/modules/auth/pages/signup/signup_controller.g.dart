@@ -164,6 +164,17 @@ mixin _$SignupController on _SignupControllerBase, Store {
   }
 
   @override
+  String? validate() {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase.validate');
+    try {
+      return super.validate();
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isValidName: ${isValidName},

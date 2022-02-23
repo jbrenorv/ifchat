@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/modules/auth/pages/signup/register_photos_page.dart';
 import 'package:ifchat/app/modules/auth/pages/signup/signup_controller.dart';
 
 import 'pages/signin/signin_page.dart';
@@ -14,5 +15,9 @@ class AuthModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => const SiginPage()),
     ChildRoute('/signup', child: (_, args) => const SigupPage()),
+    ChildRoute(
+      '/register-photos',
+      child: (_, args) => const RegisterPhotosPage(),
+    ),
   ];
 }

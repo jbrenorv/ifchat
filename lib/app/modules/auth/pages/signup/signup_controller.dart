@@ -8,7 +8,7 @@ class SignupController = _SignupControllerBase with _$SignupController;
 
 abstract class _SignupControllerBase with Store {
   final List<If> campus = <If>[If.fortaleza];
-  final List<Degree> degrees = <Degree>[Degree.int, Degree.sub, Degree.sup];
+  final List<Degree> degrees = Degree.values;
 
   final inputNameController = TextEditingController();
   final inputEmailController = TextEditingController();
@@ -52,4 +52,41 @@ abstract class _SignupControllerBase with Store {
   }
 
   String _twoDigits(int n) => n < 10 ? '0$n' : '$n';
+
+  @action
+  String? validate() {
+    String? alert;
+
+    isValidName = inputNameController.text.isNotEmpty;
+    if (!isValidName) {
+      alert = 'Informe seu nome';
+    }
+    isValidBirthDate = birth != null;
+    if (!isValidBirthDate) {
+      alert = 'Informe sua data de nascimento';
+    }
+    isValidPassword = inputPasswordController.text.length > 7;
+    if (!isValidPassword) {
+      alert = 'Use senha de no mínimo 8 caracteres';
+    }
+    if (inputEmailController.text.isNotEmpty) {
+      final splitEmail = inputEmailController.text.split('@');
+      if (splitEmail.length == 2) {
+        isValidEmail =
+            splitEmail[0].isNotEmpty && splitEmail[1] == 'aluno.ifce.edu.br';
+        if (!isValidEmail) {
+          isValidEmail = false;
+          alert = 'Use o email institucional';
+        }
+      } else {
+        isValidEmail = false;
+        alert = 'Use o email institucional';
+      }
+    } else {
+      isValidEmail = false;
+      alert = 'Use seu email institucional';
+    }
+
+    return alert;
+  }
 }
