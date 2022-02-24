@@ -1,5 +1,7 @@
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/campus.dart';
+import 'package:ifchat/app/shared/enums/gender.dart';
+import 'package:ifchat/app/shared/enums/orientation.dart' as o;
 import 'package:ifchat/app/shared/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 part 'feed_controller.g.dart';
@@ -28,7 +30,9 @@ abstract class _FeedControllerBase with Store {
         id: 'fg5g44g65dg4b4',
         birth: DateTime(2000),
         degree: Degree.sup,
-        ifce: If.fortaleza,
+        campus: Campus.fortaleza,
+        gender: Gender.feminino,
+        orientation: o.Orientation.hetero,
       ),
       UserModel(
         course: 'Matemática',
@@ -37,7 +41,9 @@ abstract class _FeedControllerBase with Store {
         id: 'fg5g44g65dg4b4',
         birth: DateTime(2004),
         degree: Degree.sup,
-        ifce: If.fortaleza,
+        campus: Campus.fortaleza,
+        gender: Gender.feminino,
+        orientation: o.Orientation.hetero,
       ),
     ]);
     isInit = true;

@@ -7,7 +7,9 @@ import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/appbar_widget.dart';
 import 'package:ifchat/app/shared/components/rounded_gray_container_widget.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/campus.dart';
+import 'package:ifchat/app/shared/enums/gender.dart';
+import 'package:ifchat/app/shared/enums/orientation.dart' as o;
 
 class SigupPage extends StatefulWidget {
   const SigupPage({Key? key}) : super(key: key);
@@ -34,12 +36,13 @@ class _SigupPageState extends State<SigupPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: SingleChildScrollView(
           child: Observer(
             builder: (_) {
               return Column(
                 children: [
+                  const SizedBox(height: 16.0),
                   _buildInputWidget(
                     labelText: 'Nome',
                     isValid: controller.isValidName,
@@ -102,10 +105,10 @@ class _SigupPageState extends State<SigupPage> {
                         Expanded(
                           child: RoundedGrayContainerWidget(
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton<If>(
+                              child: DropdownButton<Campus>(
                                 isExpanded: true,
                                 items: controller.campus
-                                    .map((v) => DropdownMenuItem<If>(
+                                    .map((v) => DropdownMenuItem<Campus>(
                                           child: Text(v.name),
                                           value: v,
                                         ))
@@ -190,6 +193,103 @@ class _SigupPageState extends State<SigupPage> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Gênero',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.ifGraySubtitle,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: RoundedGrayContainerWidget(
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<Gender>(
+                                isExpanded: true,
+                                items: controller.genders
+                                    .map((v) => DropdownMenuItem<Gender>(
+                                          child: Text(v.name),
+                                          value: v,
+                                        ))
+                                    .toList(),
+                                onChanged: (v) =>
+                                    controller.setSelectedGender(v!),
+                                value: controller.selectedGender,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Orientação',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.ifGraySubtitle,
+                          ),
+                        ),
+                        IconButton(
+                          splashRadius: 20,
+                          icon: const Icon(Icons.help_outline_rounded),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return SimpleDialog(
+                                  title: const Text(
+                                    'Você verá pessoas com a mesma orientação sexual que a sua e do mesmo gênero caso sua orientação seja homossexual, do gênero oposto caso sua orientação seja héterossexual ou de ambos os gêneros caso sua orientação seja bissexual.',
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(),
+                                  ),
+                                  children: [
+                                    Align(
+                                      child: TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: const Text('Entendi'),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        Expanded(
+                          child: RoundedGrayContainerWidget(
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<o.Orientation>(
+                                isExpanded: true,
+                                items: controller.orientations
+                                    .map((v) => DropdownMenuItem<o.Orientation>(
+                                          child: Text(v.name),
+                                          value: v,
+                                        ))
+                                    .toList(),
+                                onChanged: (v) =>
+                                    controller.setSelectedOrientation(v!),
+                                value: controller.selectedOrientation,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 60),
                 ],
               );
             },

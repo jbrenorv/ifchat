@@ -79,17 +79,49 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
+  final _$selectedGenderAtom =
+      Atom(name: '_SignupControllerBase.selectedGender');
+
+  @override
+  Gender get selectedGender {
+    _$selectedGenderAtom.reportRead();
+    return super.selectedGender;
+  }
+
+  @override
+  set selectedGender(Gender value) {
+    _$selectedGenderAtom.reportWrite(value, super.selectedGender, () {
+      super.selectedGender = value;
+    });
+  }
+
+  final _$selectedOrientationAtom =
+      Atom(name: '_SignupControllerBase.selectedOrientation');
+
+  @override
+  o.Orientation get selectedOrientation {
+    _$selectedOrientationAtom.reportRead();
+    return super.selectedOrientation;
+  }
+
+  @override
+  set selectedOrientation(o.Orientation value) {
+    _$selectedOrientationAtom.reportWrite(value, super.selectedOrientation, () {
+      super.selectedOrientation = value;
+    });
+  }
+
   final _$selectedCampusAtom =
       Atom(name: '_SignupControllerBase.selectedCampus');
 
   @override
-  If get selectedCampus {
+  Campus get selectedCampus {
     _$selectedCampusAtom.reportRead();
     return super.selectedCampus;
   }
 
   @override
-  set selectedCampus(If value) {
+  set selectedCampus(Campus value) {
     _$selectedCampusAtom.reportWrite(value, super.selectedCampus, () {
       super.selectedCampus = value;
     });
@@ -131,7 +163,29 @@ mixin _$SignupController on _SignupControllerBase, Store {
       ActionController(name: '_SignupControllerBase');
 
   @override
-  void setSelectedCampus(If v) {
+  void setSelectedGender(Gender v) {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase.setSelectedGender');
+    try {
+      return super.setSelectedGender(v);
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSelectedOrientation(o.Orientation v) {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase.setSelectedOrientation');
+    try {
+      return super.setSelectedOrientation(v);
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSelectedCampus(Campus v) {
     final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
         name: '_SignupControllerBase.setSelectedCampus');
     try {
@@ -181,6 +235,8 @@ isValidName: ${isValidName},
 isValidEmail: ${isValidEmail},
 isValidPassword: ${isValidPassword},
 isValidBirthDate: ${isValidBirthDate},
+selectedGender: ${selectedGender},
+selectedOrientation: ${selectedOrientation},
 selectedCampus: ${selectedCampus},
 selectedDegree: ${selectedDegree},
 selectedCourse: ${selectedCourse},

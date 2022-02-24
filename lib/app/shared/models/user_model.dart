@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:ifchat/app/shared/enums/campus.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/gender.dart';
+import 'package:ifchat/app/shared/enums/orientation.dart';
 
 class UserModel {
   final String course;
@@ -10,7 +12,9 @@ class UserModel {
   final String id;
   final DateTime birth;
   final Degree degree;
-  final If ifce;
+  final Campus campus;
+  final Gender gender;
+  final Orientation orientation;
 
   UserModel({
     required this.course,
@@ -19,7 +23,9 @@ class UserModel {
     required this.id,
     required this.birth,
     required this.degree,
-    required this.ifce,
+    required this.campus,
+    required this.gender,
+    required this.orientation,
   });
 
   UserModel copyWith({
@@ -29,7 +35,9 @@ class UserModel {
     String? id,
     DateTime? birth,
     Degree? degree,
-    If? ifce,
+    Campus? campus,
+    Gender? gender,
+    Orientation? orientation,
   }) {
     return UserModel(
       course: course ?? this.course,
@@ -38,7 +46,9 @@ class UserModel {
       id: id ?? this.id,
       birth: birth ?? this.birth,
       degree: degree ?? this.degree,
-      ifce: ifce ?? this.ifce,
+      campus: campus ?? this.campus,
+      gender: gender ?? this.gender,
+      orientation: orientation ?? this.orientation,
     );
   }
 
@@ -50,7 +60,9 @@ class UserModel {
       'id': id,
       'birth': birth.millisecondsSinceEpoch,
       'degree': Degree.values.indexOf(degree),
-      'ifce': If.values.indexOf(ifce),
+      'campus': Campus.values.indexOf(campus),
+      'gender': Gender.values.indexOf(gender),
+      'orientation': Orientation.values.indexOf(orientation),
     };
   }
 
@@ -62,7 +74,9 @@ class UserModel {
       id: map['id'] ?? '',
       birth: DateTime.fromMillisecondsSinceEpoch(map['birth']),
       degree: Degree.values[map['degree']],
-      ifce: If.values[map['ifce']],
+      campus: Campus.values[map['campus']],
+      gender: Gender.values[map['gender']],
+      orientation: Orientation.values[map['orientation']],
     );
   }
 
@@ -73,7 +87,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(course: $course, name: $name, photoUrl: $photoUrl, id: $id, birth: $birth, degree: $degree, ifce: $ifce)';
+    return 'UserModel(course: $course, name: $name, photoUrl: $photoUrl, id: $id, birth: $birth, degree: $degree, campus: $campus, gender: $gender, orientation: $orientation)';
   }
 
   @override
@@ -87,7 +101,9 @@ class UserModel {
         other.id == id &&
         other.birth == birth &&
         other.degree == degree &&
-        other.ifce == ifce;
+        other.campus == campus &&
+        other.gender == gender &&
+        other.orientation == orientation;
   }
 
   @override
@@ -98,7 +114,9 @@ class UserModel {
         id.hashCode ^
         birth.hashCode ^
         degree.hashCode ^
-        ifce.hashCode;
+        campus.hashCode ^
+        gender.hashCode ^
+        orientation.hashCode;
   }
 
   int get age => birth.difference(DateTime.now()).inDays ~/ 365;

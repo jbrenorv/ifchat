@@ -6,7 +6,7 @@ import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/icons/app_icons.dart';
 import 'package:ifchat/app/shared/models/user_model.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/campus.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 import 'icon_button_widget.dart';
@@ -132,7 +132,7 @@ class _UserCardWidgetState extends State<UserCardWidget>
                         ),
                         Text(
                           '${widget.user.course}, ${widget.user.degree.sigla}'
-                          ' • ${widget.user.ifce.name}',
+                          ' • ${widget.user.campus.name}',
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: AppColors.ifWhiteSubtitle,

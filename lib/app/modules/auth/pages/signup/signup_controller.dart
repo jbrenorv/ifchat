@@ -1,14 +1,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/campus.dart';
+import 'package:ifchat/app/shared/enums/gender.dart';
+import 'package:ifchat/app/shared/enums/orientation.dart' as o;
 import 'package:mobx/mobx.dart';
 part 'signup_controller.g.dart';
 
 class SignupController = _SignupControllerBase with _$SignupController;
 
 abstract class _SignupControllerBase with Store {
-  final List<If> campus = <If>[If.fortaleza];
+  final List<Campus> campus = <Campus>[Campus.fortaleza];
   final List<Degree> degrees = Degree.values;
+  final List<Gender> genders = Gender.values;
+  final List<o.Orientation> orientations = o.Orientation.values;
 
   final inputNameController = TextEditingController();
   final inputEmailController = TextEditingController();
@@ -25,9 +29,19 @@ abstract class _SignupControllerBase with Store {
   bool isValidBirthDate = true;
 
   @observable
-  If selectedCampus = If.fortaleza;
+  Gender selectedGender = Gender.masculino;
   @action
-  void setSelectedCampus(If v) => selectedCampus = v;
+  void setSelectedGender(Gender v) => selectedGender = v;
+
+  @observable
+  o.Orientation selectedOrientation = o.Orientation.hetero;
+  @action
+  void setSelectedOrientation(o.Orientation v) => selectedOrientation = v;
+
+  @observable
+  Campus selectedCampus = Campus.fortaleza;
+  @action
+  void setSelectedCampus(Campus v) => selectedCampus = v;
 
   @observable
   Degree selectedDegree = Degree.sup;
@@ -40,7 +54,7 @@ abstract class _SignupControllerBase with Store {
   @computed
   List<String> get courses => selectedCampus.courses[selectedDegree]!;
   @observable
-  String selectedCourse = If.fortaleza.courses[Degree.sup]!.first;
+  String selectedCourse = Campus.fortaleza.courses[Degree.sup]!.first;
   @action
   void setSelectedCourse(String v) => selectedCourse = v;
 

@@ -1,6 +1,6 @@
 import 'package:ifchat/app/shared/enums/degree.dart';
 
-enum If {
+enum Campus {
   acarau,
   aracati,
   baturite,
@@ -26,61 +26,61 @@ enum If {
   umirim,
 }
 
-extension ToString on If {
+extension ToString on Campus {
   String get name {
     switch (this) {
-      case If.acarau:
+      case Campus.acarau:
         return 'Acaraú';
-      case If.aracati:
+      case Campus.aracati:
         return 'Aracati';
-      case If.baturite:
+      case Campus.baturite:
         return 'Baturité';
-      case If.camocim:
+      case Campus.camocim:
         return 'Camocim';
-      case If.caninde:
+      case Campus.caninde:
         return 'Canindé';
-      case If.caucaia:
+      case Campus.caucaia:
         return 'Caucaia';
-      case If.cedro:
+      case Campus.cedro:
         return 'Cedro';
-      case If.crateus:
+      case Campus.crateus:
         return 'Crateus';
-      case If.crato:
+      case Campus.crato:
         return 'Crato';
-      case If.fortaleza:
+      case Campus.fortaleza:
         return 'Fortaleza';
-      case If.iguatu:
+      case Campus.iguatu:
         return 'Iguatu';
-      case If.jaguaribe:
+      case Campus.jaguaribe:
         return 'Jaguaribe';
-      case If.juazeiro:
+      case Campus.juazeiro:
         return 'Juazeiro';
-      case If.limoeiro:
+      case Campus.limoeiro:
         return 'Limoeiro';
-      case If.maracanau:
+      case Campus.maracanau:
         return 'Maracanaú';
-      case If.morada:
+      case Campus.morada:
         return 'Morada';
-      case If.quixada:
+      case Campus.quixada:
         return 'Quixadá';
-      case If.sobral:
+      case Campus.sobral:
         return 'Sobral';
-      case If.tabuleiro:
+      case Campus.tabuleiro:
         return 'Tabuleiro';
-      case If.taua:
+      case Campus.taua:
         return 'Tauá';
-      case If.tiangua:
+      case Campus.tiangua:
         return 'Tianguá';
-      case If.ubajara:
+      case Campus.ubajara:
         return 'Ubajara';
-      case If.umirim:
+      case Campus.umirim:
         return 'Umirim';
     }
   }
 
   Map<Degree, List<String>> get courses {
     switch (this) {
-      case If.fortaleza:
+      case Campus.fortaleza:
         return {
           Degree.sup: [
             // tecnologos
