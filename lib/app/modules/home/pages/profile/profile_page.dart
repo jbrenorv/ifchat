@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
-import 'package:ifchat/app/shared/enums/if.dart';
+import 'package:ifchat/app/shared/enums/campus.dart';
+import 'package:ifchat/app/shared/enums/gender.dart';
+import 'package:ifchat/app/shared/enums/orientation.dart' as o;
 import 'package:ifchat/app/shared/icons/app_icons.dart';
 import 'package:ifchat/app/shared/models/user_model.dart';
 
@@ -20,7 +22,9 @@ class _ProfilePageState extends State<ProfilePage> {
     id: 'fg5g44g65dg4b4',
     birth: DateTime(2000),
     degree: Degree.sup,
-    ifce: If.fortaleza,
+    campus: Campus.fortaleza,
+    gender: Gender.feminino,
+    orientation: o.Orientation.hetero,
   );
 
   @override
