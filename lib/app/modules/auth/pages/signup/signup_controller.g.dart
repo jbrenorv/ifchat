@@ -172,6 +172,21 @@ mixin _$SignupController on _SignupControllerBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_SignupControllerBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$_SignupControllerBaseActionController =
       ActionController(name: '_SignupControllerBase');
 
@@ -242,7 +257,7 @@ mixin _$SignupController on _SignupControllerBase, Store {
   }
 
   @override
-  void removeImage(File v) {
+  void removeImage(PickedImageModel v) {
     final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
         name: '_SignupControllerBase.removeImage');
     try {
@@ -253,11 +268,22 @@ mixin _$SignupController on _SignupControllerBase, Store {
   }
 
   @override
-  void addImage(File v) {
+  void addImage(PickedImageModel v) {
     final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
         name: '_SignupControllerBase.addImage');
     try {
       return super.addImage(v);
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void _setLoading(bool v) {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase._setLoading');
+    try {
+      return super._setLoading(v);
     } finally {
       _$_SignupControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -275,6 +301,7 @@ selectedOrientation: ${selectedOrientation},
 selectedCampus: ${selectedCampus},
 selectedDegree: ${selectedDegree},
 selectedCourse: ${selectedCourse},
+isLoading: ${isLoading},
 courses: ${courses},
 done: ${done},
 canAddAnotherImage: ${canAddAnotherImage}

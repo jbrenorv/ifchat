@@ -1,10 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/campus.dart';
 import 'package:ifchat/app/shared/enums/gender.dart';
 import 'package:ifchat/app/shared/enums/orientation.dart' as o;
+import 'package:ifchat/app/shared/interfaces/i_auth_service.dart';
+import 'package:ifchat/app/shared/interfaces/i_database_service.dart';
+import 'package:ifchat/app/shared/interfaces/i_storage_service.dart';
+import 'package:ifchat/app/shared/models/picked_image_model.dart';
+import 'package:ifchat/app/shared/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 part 'signup_controller.g.dart';
 
@@ -107,13 +113,95 @@ abstract class _SignupControllerBase with Store {
     return alert;
   }
 
-  ObservableList<File> images = <File>[].asObservable();
+  ObservableList<PickedImageModel> photos = <PickedImageModel>[].asObservable();
   @action
-  void removeImage(File v) => images.remove(v);
+  void removeImage(PickedImageModel v) => photos.remove(v);
   @action
-  void addImage(File v) => images.add(v);
+  void addImage(PickedImageModel v) => photos.add(v);
   @computed
-  bool get done => images.isNotEmpty;
+  bool get done => photos.isNotEmpty && !isLoading;
   @computed
-  bool get canAddAnotherImage => images.length < 3;
+  bool get canAddAnotherImage => photos.length < 3 && !isLoading;
+
+  @observable
+  bool isLoading = false;
+  @action
+  void _setLoading(bool v) => isLoading = v;
+
+  Future<String?> registerUser() async {
+    _setLoading(true);
+
+    // if result != null --> ERROR --> reverse all operations
+    String? result;
+
+    // services
+    final auth = Modular.get<IAuthService>();
+    final storage = Modular.get<IStorageService>();
+    final db = Modular.get<IDatabaseService>();
+
+    // register user
+    final authResponse = await auth.createUserWithEmailAndPassword(
+      email: inputEmailController.text,
+      password: inputPasswordController.text,
+    );
+
+    if (!authResponse.hasError) {
+      final uid = authResponse.value!;
+      final urls = <String>[];
+      int photoId = 0;
+      bool uploaded = true;
+
+      // save user photos
+      for (PickedImageModel photo in photos) {
+        final uploadResponse = await storage.saveUserPhoto(
+          uid,
+          'photo_$photoId.${photo.extendion}',
+          photo.data,
+        );
+        photoId++;
+
+        if (!uploadResponse.hasError) {
+          urls.add(uploadResponse.value!);
+        } else {
+          result = uploadResponse.message;
+          uploaded = false;
+          break;
+        }
+      }
+
+      if (uploaded) {
+        final user = UserModel(
+          course: selectedCourse,
+          name: inputNameController.text,
+          photos: urls,
+          id: uid,
+          birth: birth!,
+          degree: selectedDegree,
+          campus: selectedCampus,
+          gender: selectedGender,
+          orientation: selectedOrientation,
+        );
+
+        // save user data
+        final dbResponse = await db.createUser(user);
+        result = dbResponse.message;
+      }
+    } else {
+      result = authResponse.message;
+    }
+
+    _setLoading(false);
+    return result;
+  }
+
+  Future<void> reverse() async {
+    // services
+    final auth = Modular.get<IAuthService>();
+    final storage = Modular.get<IStorageService>();
+    final db = Modular.get<IDatabaseService>();
+
+    await db.deleteUser(auth.uid);
+    await storage.deleteUserPhotos(auth.uid);
+    await auth.deleteUserAccount();
+  }
 }

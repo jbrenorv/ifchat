@@ -20,7 +20,7 @@ class ItemChatWidget extends StatelessWidget {
               dimension: 60,
               child: CircleAvatar(
                 radius: 30,
-                backgroundImage: NetworkImage(chat.user.photoUrl),
+                backgroundImage: NetworkImage(chat.user.photos.first),
               ),
             ),
             const SizedBox(width: 20),

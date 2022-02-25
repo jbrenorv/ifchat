@@ -7,6 +7,7 @@ import 'package:ifchat/app/modules/auth/pages/signup/signup_controller.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/appbar_widget.dart';
 import 'package:ifchat/app/shared/components/icon_button_widget.dart';
+import 'package:ifchat/app/shared/models/picked_image_model.dart';
 import 'package:ifchat/app/shared/utils/utils.dart';
 import 'package:image_crop/image_crop.dart';
 
@@ -24,9 +25,21 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
     final file = await Utils.pickImageFromGallery();
     if (file != null) {
       final croppedFile = await Modular.to.push<File>(
-        MaterialPageRoute(builder: (_) => _CropImagePage(imageFile: file)),
+        MaterialPageRoute(builder: (_) => _CropImagePage(imageFile: file.data)),
       );
-      controller.addImage(croppedFile!);
+      controller.addImage(PickedImageModel(
+        data: croppedFile!,
+        name: file.name,
+      ));
+    }
+  }
+
+  void _registerUser() async {
+    final response = await controller.registerUser();
+    if (response != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(response)));
+      await controller.reverse();
     }
   }
 
@@ -70,7 +83,7 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
                           spacing: 8.0,
                           runSpacing: 8.0,
                           alignment: WrapAlignment.center,
-                          children: controller.images
+                          children: controller.photos
                               .map((file) => _buildImageItem(
                                     file,
                                     controller.removeImage,
@@ -79,7 +92,11 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
                         );
                       }),
                     ),
-                    const LinearProgressIndicator(),
+                    Observer(builder: (_) {
+                      return controller.isLoading
+                          ? const LinearProgressIndicator()
+                          : const SizedBox(height: 2);
+                    }),
                   ],
                 ),
               ),
@@ -106,7 +123,7 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
               heroTag: 'finish',
               backgroundColor: AppColors.ifMaterialGreenColor,
               disabledElevation: 0.0,
-              onPressed: controller.done ? () {} : null,
+              onPressed: controller.done ? _registerUser : null,
               label: const Text(
                 'Finalizar',
                 style: TextStyle(
@@ -125,7 +142,8 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
     );
   }
 
-  Widget _buildImageItem(File imageFile, ValueChanged<File> delete) {
+  Widget _buildImageItem(
+      PickedImageModel image, ValueChanged<PickedImageModel> delete) {
     return Material(
       elevation: 8.0,
       borderRadius: BorderRadius.circular(10),
@@ -146,14 +164,14 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
                 child: AspectRatio(
                   aspectRatio: 3.0 / 4.0,
                   child: Image.file(
-                    imageFile,
+                    image.data,
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () => delete(imageFile),
+              onTap: () => delete(image),
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 2),
                 child: Icon(
