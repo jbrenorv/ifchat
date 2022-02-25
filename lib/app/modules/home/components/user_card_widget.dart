@@ -9,7 +9,7 @@ import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/campus.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
-import 'icon_button_widget.dart';
+import '../../../shared/components/icon_button_widget.dart';
 
 class UserCardWidget extends StatefulWidget {
   const UserCardWidget({
