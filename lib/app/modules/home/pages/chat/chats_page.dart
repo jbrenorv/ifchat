@@ -25,7 +25,7 @@ class _ChatsPageState extends State<ChatsPage> {
       user: UserModel(
         course: 'Computação',
         name: 'Eloise',
-        photoUrl: 'https://picsum.photos/id/832/300/400',
+        photos: ['https://picsum.photos/id/832/300/400'],
         id: 'fg5g44g65dg4b4',
         birth: DateTime(2000),
         degree: Degree.sup,
@@ -42,7 +42,7 @@ class _ChatsPageState extends State<ChatsPage> {
       user: UserModel(
         course: 'Matemática',
         name: 'Nagila',
-        photoUrl: 'https://picsum.photos/id/65/300/400',
+        photos: ['https://picsum.photos/id/65/300/400'],
         id: 'fg5g44g65dg4b4',
         birth: DateTime(2004),
         degree: Degree.sup,

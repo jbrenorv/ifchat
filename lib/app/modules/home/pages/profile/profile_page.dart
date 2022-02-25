@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final currentUser = UserModel(
     course: 'Computação',
     name: 'Breno',
-    photoUrl: 'https://picsum.photos/id/1005/300/400',
+    photos: ['https://picsum.photos/id/1005/300/400'],
     id: 'fg5g44g65dg4b4',
     birth: DateTime(2000),
     degree: Degree.sup,
@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               CircleAvatar(
                 radius: 85,
-                backgroundImage: NetworkImage(currentUser.photoUrl),
+                backgroundImage: NetworkImage(currentUser.photos.first),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),

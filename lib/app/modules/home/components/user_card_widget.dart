@@ -108,7 +108,7 @@ class _UserCardWidgetState extends State<UserCardWidget>
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(widget.user.photoUrl),
+                        image: NetworkImage(widget.user.photos.first),
                         fit: BoxFit.cover,
                       ),
                     ),
