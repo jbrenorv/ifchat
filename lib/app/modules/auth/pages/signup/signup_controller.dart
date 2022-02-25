@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/campus.dart';
@@ -14,9 +16,10 @@ abstract class _SignupControllerBase with Store {
   final List<Gender> genders = Gender.values;
   final List<o.Orientation> orientations = o.Orientation.values;
 
-  final inputNameController = TextEditingController();
-  final inputEmailController = TextEditingController();
-  final inputPasswordController = TextEditingController();
+  final inputNameController = TextEditingController(text: 'João Breno');
+  final inputEmailController =
+      TextEditingController(text: 'joao.breno@aluno.ifce.edu.br');
+  final inputPasswordController = TextEditingController(text: '12345678');
   final inputBirthController = TextEditingController();
 
   @observable
@@ -103,4 +106,14 @@ abstract class _SignupControllerBase with Store {
 
     return alert;
   }
+
+  ObservableList<File> images = <File>[].asObservable();
+  @action
+  void removeImage(File v) => images.remove(v);
+  @action
+  void addImage(File v) => images.add(v);
+  @computed
+  bool get done => images.isNotEmpty;
+  @computed
+  bool get canAddAnotherImage => images.length < 3;
 }

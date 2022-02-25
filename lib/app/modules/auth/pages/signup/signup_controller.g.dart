@@ -16,6 +16,19 @@ mixin _$SignupController on _SignupControllerBase, Store {
       (_$coursesComputed ??= Computed<List<String>>(() => super.courses,
               name: '_SignupControllerBase.courses'))
           .value;
+  Computed<bool>? _$doneComputed;
+
+  @override
+  bool get done => (_$doneComputed ??=
+          Computed<bool>(() => super.done, name: '_SignupControllerBase.done'))
+      .value;
+  Computed<bool>? _$canAddAnotherImageComputed;
+
+  @override
+  bool get canAddAnotherImage => (_$canAddAnotherImageComputed ??=
+          Computed<bool>(() => super.canAddAnotherImage,
+              name: '_SignupControllerBase.canAddAnotherImage'))
+      .value;
 
   final _$isValidNameAtom = Atom(name: '_SignupControllerBase.isValidName');
 
@@ -229,6 +242,28 @@ mixin _$SignupController on _SignupControllerBase, Store {
   }
 
   @override
+  void removeImage(File v) {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase.removeImage');
+    try {
+      return super.removeImage(v);
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addImage(File v) {
+    final _$actionInfo = _$_SignupControllerBaseActionController.startAction(
+        name: '_SignupControllerBase.addImage');
+    try {
+      return super.addImage(v);
+    } finally {
+      _$_SignupControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isValidName: ${isValidName},
@@ -240,7 +275,9 @@ selectedOrientation: ${selectedOrientation},
 selectedCampus: ${selectedCampus},
 selectedDegree: ${selectedDegree},
 selectedCourse: ${selectedCourse},
-courses: ${courses}
+courses: ${courses},
+done: ${done},
+canAddAnotherImage: ${canAddAnotherImage}
     ''';
   }
 }
