@@ -51,4 +51,34 @@ class AuthService extends IAuthService {
 
   @override
   String get uid => firebaseAuth.currentUser!.uid;
+
+  @override
+  Future<DefaultResponse> logout() async {
+    try {
+      await firebaseAuth.signOut();
+      return DefaultResponse();
+    } catch (e) {
+      return DefaultResponse.error(message: 'Algo deu errado.');
+    }
+  }
+
+  @override
+  Future<DefaultResponse<String>> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      UserCredential userCredential = await firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      return DefaultResponse(value: userCredential.user!.uid);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        return DefaultResponse.error(message: 'Email ou senha incorretos.');
+      }
+      return DefaultResponse.error(message: 'Algo deu errado.');
+    } catch (e) {
+      return DefaultResponse.error(message: 'Algo deu errado.');
+    }
+  }
 }
