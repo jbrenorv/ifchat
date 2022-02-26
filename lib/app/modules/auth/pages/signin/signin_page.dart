@@ -4,6 +4,7 @@ import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/text_input_widget.dart';
 import 'package:ifchat/app/shared/images/app_images.dart';
+import 'package:ifchat/app/shared/interfaces/i_auth_service.dart';
 
 class SiginPage extends StatefulWidget {
   const SiginPage({Key? key}) : super(key: key);
@@ -15,6 +16,30 @@ class SiginPage extends StatefulWidget {
 class _SiginPageState extends State<SiginPage> {
   final _inputEmailController = TextEditingController();
   final _inputPasswordController = TextEditingController();
+
+  void _siginUser() async {
+    if (_inputEmailController.text.isEmpty ||
+        _inputPasswordController.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Infome email e senha')));
+    } else {
+      final auth = Modular.get<IAuthService>();
+      final response = await auth.signInWithEmailAndPassword(
+        _inputEmailController.text,
+        _inputPasswordController.text,
+      );
+
+      if (!response.hasError) {
+        Modular.to.pushNamedAndRemoveUntil(
+          AppRoutes.home,
+          (_) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(response.message!)));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

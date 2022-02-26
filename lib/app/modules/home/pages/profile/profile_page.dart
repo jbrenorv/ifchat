@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/enums/degree.dart';
 import 'package:ifchat/app/shared/enums/campus.dart';
 import 'package:ifchat/app/shared/enums/gender.dart';
 import 'package:ifchat/app/shared/enums/orientation.dart' as o;
 import 'package:ifchat/app/shared/icons/app_icons.dart';
+import 'package:ifchat/app/shared/interfaces/i_auth_service.dart';
 import 'package:ifchat/app/shared/models/user_model.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -26,6 +29,21 @@ class _ProfilePageState extends State<ProfilePage> {
     gender: Gender.feminino,
     orientation: o.Orientation.hetero,
   );
+
+  Future<void> _logout() async {
+    final auth = Modular.get<IAuthService>();
+    final response = await auth.logout();
+
+    if (!response.hasError) {
+      Modular.to.pushNamedAndRemoveUntil(
+        AppRoutes.signin,
+        (_) => false,
+      );
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Algo deu errado')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +156,34 @@ class _ProfilePageState extends State<ProfilePage> {
               AppIcons.logout,
               color: AppColors.ifRed,
             ),
-            onTap: () {},
+            onTap: () async {
+              final response = await showDialog<bool>(
+                context: context,
+                builder: (ctx) {
+                  return AlertDialog(
+                    title: const Text('Deseja mesmo sair?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(true);
+                        },
+                        child: const Text('Sim'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(false);
+                        },
+                        child: const Text('Não'),
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              if (response ?? false) {
+                await _logout();
+              }
+            },
           ),
         ],
       ),

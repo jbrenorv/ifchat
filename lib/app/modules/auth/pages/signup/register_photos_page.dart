@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:ifchat/app/app_routes.dart';
 import 'package:ifchat/app/modules/auth/pages/signup/signup_controller.dart';
 import 'package:ifchat/app/shared/colors/app_colors.dart';
 import 'package:ifchat/app/shared/components/appbar_widget.dart';
 import 'package:ifchat/app/shared/components/icon_button_widget.dart';
 import 'package:ifchat/app/shared/models/picked_image_model.dart';
 import 'package:ifchat/app/shared/utils/utils.dart';
+import 'package:mobx/mobx.dart';
 import 'package:image_crop/image_crop.dart';
 
 class RegisterPhotosPage extends StatefulWidget {
@@ -20,6 +22,31 @@ class RegisterPhotosPage extends StatefulWidget {
 
 class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
   final controller = Modular.get<SignupController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    reaction<bool>((r) => controller.isLoading, (isLoading) {
+      if (isLoading) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => AlertDialog(
+            title: Row(
+              children: const <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(width: 10.0),
+                Text('Aguarde'),
+              ],
+            ),
+          ),
+        );
+      } else {
+        Navigator.pop(context);
+      }
+    });
+  }
 
   void _pickImage() async {
     final file = await Utils.pickImageFromGallery();
@@ -40,6 +67,11 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(response)));
       await controller.reverse();
+    } else {
+      Modular.to.pushNamedAndRemoveUntil(
+        AppRoutes.home,
+        (_) => false,
+      );
     }
   }
 
@@ -92,11 +124,6 @@ class _RegisterPhotosPageState extends State<RegisterPhotosPage> {
                         );
                       }),
                     ),
-                    Observer(builder: (_) {
-                      return controller.isLoading
-                          ? const LinearProgressIndicator()
-                          : const SizedBox(height: 2);
-                    }),
                   ],
                 ),
               ),

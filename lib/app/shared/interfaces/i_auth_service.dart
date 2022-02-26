@@ -10,5 +10,10 @@ abstract class IAuthService {
 
   Future<DefaultResponse> deleteUserAccount();
 
+  Future<DefaultResponse> logout();
+
+  Future<DefaultResponse<String>> signInWithEmailAndPassword(
+      String email, String password);
+
   String get uid;
 }
